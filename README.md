@@ -1,1 +1,1 @@
-# spendwise-app
+# SpendWise App
