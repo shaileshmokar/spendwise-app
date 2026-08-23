@@ -36,3 +36,10 @@ pnpm-debug.log*
 next-env.d.ts
 
 /lib/generated/prisma
+
+# AI coding tool files
+.agents/
+.claude/
+.windsurf/
+
+skills-lock.json
