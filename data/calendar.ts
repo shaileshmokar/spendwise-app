@@ -1,0 +1,68 @@
+import { Transaction } from "@/type/calendar"
+
+export const transactions: Transaction[] = [
+  {
+    id: 1,
+    date: "2026-08-03",
+    title: "Grocery Shopping",
+    category: "Food",
+    amount: 2450,
+    type: "expense",
+  },
+  {
+    id: 2,
+    date: "2026-08-05",
+    title: "Salary",
+    category: "Income",
+    amount: 85000,
+    type: "income",
+  },
+  {
+    id: 3,
+    date: "2026-08-07",
+    title: "Electricity Bill",
+    category: "Bills",
+    amount: 3200,
+    type: "expense",
+  },
+  {
+    id: 4,
+    date: "2026-08-10",
+    title: "Restaurant",
+    category: "Food",
+    amount: 1850,
+    type: "expense",
+  },
+  {
+    id: 5,
+    date: "2026-08-12",
+    title: "Freelance Payment",
+    category: "Income",
+    amount: 12000,
+    type: "income",
+  },
+  {
+    id: 6,
+    date: "2026-08-14",
+    title: "Fuel",
+    category: "Transport",
+    amount: 1800,
+    type: "expense",
+  },
+  {
+    id: 7,
+    date: "2026-08-15",
+    title: "Shopping",
+    category: "Shopping",
+    amount: 4200,
+    type: "expense",
+  },
+  {
+    id: 8,
+    date: "2026-08-12",
+    title: "Grocery Shopping",
+    category: "Shopping",
+    amount: 3500,
+    type: "expense",
+  },
+]
