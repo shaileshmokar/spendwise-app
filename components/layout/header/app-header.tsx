@@ -11,10 +11,10 @@ import { HeaderAddTransaction } from "./header-add-transaction"
 import { HeaderUserMenu } from "./header-user-menu"
 import { HeaderThemeSwitcher } from "./header-theme-switcher"
 
-// type Session = typeof auth.$Infer.Session
+type Session = typeof auth.$Infer.Session
 
-// export function AppHeader({ data }: { data: Session | null }) {
-export function AppHeader() {
+export function AppHeader({ data }: { data: Session }) {
+  // export function AppHeader() {
   // console.log("AppHeader Data", data)
 
   return (
@@ -30,9 +30,9 @@ export function AppHeader() {
         {/* <HeaderDateRange /> */}
         {/* <HeaderAddTransaction /> */}
         <HeaderThemeSwitcher />
-        <HeaderNotifications />
-        {/* <HeaderUserMenu data={data} /> */}
-        <HeaderUserMenu />
+        {/* <HeaderNotifications /> */}
+        <HeaderUserMenu data={data} />
+        {/* <HeaderUserMenu /> */}
       </div>
     </header>
   )

@@ -50,7 +50,10 @@ export function NavUser({
           >
             <Avatar>
               <AvatarImage src={user.avatar} alt={user.name} />
-              <AvatarFallback>SM</AvatarFallback>
+              {/* <AvatarFallback>SM</AvatarFallback> */}
+              <AvatarFallback className="border-blue-600 bg-blue-600 font-semibold text-white">
+                JD
+              </AvatarFallback>
             </Avatar>
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-medium">{user.name}</span>

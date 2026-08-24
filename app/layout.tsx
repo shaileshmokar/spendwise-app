@@ -1,7 +1,8 @@
-import { Metadata } from "next"
 import { Geist_Mono, Inter, Outfit } from "next/font/google"
 import "./globals.css"
+import { Metadata } from "next"
 import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/sonner"
 
 const outfitHeading = Outfit({ subsets: ["latin"], variable: "--font-heading" })
 
@@ -41,7 +42,8 @@ export default async function RootLayout({
       )}
     >
       <body>
-        <main className="">{children}</main>
+        <main>{children}</main>
+        <Toaster />
       </body>
     </html>
   )

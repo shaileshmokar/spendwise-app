@@ -148,7 +148,10 @@ export default function SettingsPage() {
               <div className="relative mx-auto sm:mx-0">
                 <Avatar className="size-24 border">
                   <AvatarImage src="/avatar.png" alt="Shailesh Mokar" />
-                  <AvatarFallback className="text-4xl">SM</AvatarFallback>
+                  {/* <AvatarFallback className="text-4xl">SM</AvatarFallback> */}
+                  <AvatarFallback className="border-blue-600 bg-blue-600 text-4xl font-semibold text-white">
+                    JD
+                  </AvatarFallback>
                 </Avatar>
 
                 {/* <Button
