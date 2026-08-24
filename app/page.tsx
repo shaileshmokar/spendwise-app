@@ -33,7 +33,7 @@ export default function Page() {
               <div className="rounded-lg bg-blue-600 p-2 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                 <Wallet className="h-5 w-5 text-white" />
               </div>
-              <span className="font-mono text-lg font-bold text-blue-600">
+              <span className="font-mono text-2xl font-bold text-blue-600">
                 SpendWise
               </span>
             </div>
@@ -87,10 +87,10 @@ export default function Page() {
       </nav>
 
       {/* Hero Section with fade-in animations */}
-      <section className="relative overflow-hidden bg-linear-to-br from-blue-50 via-white to-purple-50/30 py-20 lg:py-28">
+      <section className="relative overflow-hidden bg-linear-to-br from-blue-50 to-purple-50/30 py-20 lg:py-28">
         <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 h-full w-1/2 bg-linear-to-l from-blue-500/5 to-transparent" />
-          <div className="absolute bottom-0 left-0 h-1/2 w-1/3 bg-linear-to-t from-purple-500/5 to-transparent" />
+          <div className="absolute top-0 right-0 h-1/2 w-1/3 rounded-bl-full bg-linear-to-l from-blue-500/5 to-transparent" />
+          <div className="absolute bottom-0 left-0 h-1/2 w-1/3 rounded-tr-full bg-linear-to-t from-purple-500/5 to-transparent" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -207,34 +207,172 @@ export default function Page() {
 
                     {/* Mini Chart with stagger animation */}
                     <div className="rounded-lg bg-slate-50 p-3">
-                      <div className="mb-2 flex justify-between text-xs text-slate-500">
-                        <span>Income vs Expenses</span>
-                        <span>This month</span>
+                      <div className="mb-2 flex items-center justify-between">
+                        <div>
+                          <span className="text-xs font-medium text-slate-700">
+                            Income vs Expenses
+                          </span>
+                          <div className="mt-1 flex items-center gap-3 text-[10px] text-slate-500">
+                            <span className="flex items-center gap-1">
+                              <span className="inline-block h-2 w-2 rounded-sm bg-emerald-400" />
+                              Income
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <span className="inline-block h-2 w-2 rounded-sm bg-rose-400" />
+                              Expenses
+                            </span>
+                          </div>
+                        </div>
+                        <span className="text-xs text-slate-400">
+                          This month
+                        </span>
                       </div>
-                      <div className="flex h-12 items-end gap-1">
-                        {[40, 60, 45, 70, 55, 80, 65, 75, 50, 85, 60, 45].map(
-                          (height, i) => (
+
+                      <div className="mt-3 flex h-14 items-end gap-1">
+                        {[
+                          { income: 40, expense: 25 },
+                          { income: 60, expense: 35 },
+                          { income: 45, expense: 30 },
+                          { income: 70, expense: 45 },
+                          { income: 55, expense: 40 },
+                          { income: 80, expense: 50 },
+                          { income: 65, expense: 55 },
+                          { income: 75, expense: 60 },
+                          { income: 50, expense: 35 },
+                          { income: 85, expense: 65 },
+                          { income: 60, expense: 40 },
+                          { income: 45, expense: 30 },
+                        ].map((data, i) => {
+                          // Find the maximum value across all data for consistent scaling
+                          const maxValue = Math.max(
+                            ...[
+                              { income: 40, expense: 25 },
+                              { income: 60, expense: 35 },
+                              { income: 45, expense: 30 },
+                              { income: 70, expense: 45 },
+                              { income: 55, expense: 40 },
+                              { income: 80, expense: 50 },
+                              { income: 65, expense: 55 },
+                              { income: 75, expense: 60 },
+                              { income: 50, expense: 35 },
+                              { income: 85, expense: 65 },
+                              { income: 60, expense: 40 },
+                              { income: 45, expense: 30 },
+                            ].flatMap((d) => [d.income, d.expense])
+                          )
+
+                          // Calculate heights as percentage of max value
+                          const incomeHeight = (data.income / maxValue) * 100
+                          const expenseHeight = (data.expense / maxValue) * 100
+
+                          // Calculate total height and convert to px
+                          const totalHeight = incomeHeight + expenseHeight
+                          const minHeightPx = Math.max(
+                            4,
+                            (totalHeight / 100) * 14
+                          ) // 14px is the container height (h-14)
+
+                          return (
                             <div
                               key={i}
-                              className="flex flex-1 flex-col gap-0.5"
+                              className="group relative flex flex-1 flex-col items-center gap-0.5"
                             >
+                              {/* Tooltip on hover */}
+                              <div className="absolute -top-8 z-10 hidden rounded bg-slate-800 px-2 py-1 text-[10px] whitespace-nowrap text-white group-hover:block">
+                                Income: ${data.income}k<br />
+                                Expenses: ${data.expense}k
+                              </div>
+
                               <div
-                                className="w-full rounded-sm bg-blue-400/60 transition-all duration-500 hover:bg-blue-500"
-                                style={{
-                                  height: `${height * 0.6}%`,
-                                  animation: `bar-grow 0.5s ease-out ${i * 40}ms both`,
-                                }}
-                              />
-                              <div
-                                className="w-full rounded-sm bg-blue-600/80 transition-all duration-500 hover:bg-blue-700"
-                                style={{
-                                  height: `${height * 0.4}%`,
-                                  animation: `bar-grow 0.5s ease-out ${i * 40 + 200}ms both`,
-                                }}
-                              />
+                                className="relative flex w-full flex-col justify-end"
+                                style={{ height: "100%" }}
+                              >
+                                {/* Income bar */}
+                                <div
+                                  className="w-full rounded-sm bg-emerald-400 transition-all duration-500 hover:bg-emerald-500"
+                                  style={{
+                                    height: `${incomeHeight}%`,
+                                    minHeight: `${minHeightPx}px`,
+                                    animation: `bar-grow 0.5s ease-out ${i * 40}ms both`,
+                                  }}
+                                />
+                                {/* Expense bar */}
+                                <div
+                                  className="mt-0.5 w-full rounded-sm bg-rose-400 transition-all duration-500 hover:bg-rose-500"
+                                  style={{
+                                    height: `${expenseHeight}%`,
+                                    minHeight: `${minHeightPx}px`,
+                                    animation: `bar-grow 0.5s ease-out ${i * 40 + 150}ms both`,
+                                  }}
+                                />
+                              </div>
+
+                              {/* Month labels */}
+                              <span className="mt-1 text-[8px] text-slate-400">
+                                {
+                                  [
+                                    "Jan",
+                                    "Feb",
+                                    "Mar",
+                                    "Apr",
+                                    "May",
+                                    "Jun",
+                                    "Jul",
+                                    "Aug",
+                                    "Sep",
+                                    "Oct",
+                                    "Nov",
+                                    "Dec",
+                                  ][i]
+                                }
+                              </span>
                             </div>
                           )
-                        )}
+                        })}
+                      </div>
+
+                      {/* Key insight - dynamically calculated */}
+                      <div className="mt-2 rounded bg-slate-100 px-2 py-1 text-center text-[10px] text-slate-600">
+                        <span className="font-medium">💡 Insight:</span>{" "}
+                        Expenses are
+                        <span className="font-semibold text-rose-500">
+                          {" "}
+                          {Math.round(
+                            (() => {
+                              const totalIncome = [
+                                { income: 40, expense: 25 },
+                                { income: 60, expense: 35 },
+                                { income: 45, expense: 30 },
+                                { income: 70, expense: 45 },
+                                { income: 55, expense: 40 },
+                                { income: 80, expense: 50 },
+                                { income: 65, expense: 55 },
+                                { income: 75, expense: 60 },
+                                { income: 50, expense: 35 },
+                                { income: 85, expense: 65 },
+                                { income: 60, expense: 40 },
+                                { income: 45, expense: 30 },
+                              ].reduce((sum, d) => sum + d.income, 0)
+                              const totalExpense = [
+                                { income: 40, expense: 25 },
+                                { income: 60, expense: 35 },
+                                { income: 45, expense: 30 },
+                                { income: 70, expense: 45 },
+                                { income: 55, expense: 40 },
+                                { income: 80, expense: 50 },
+                                { income: 65, expense: 55 },
+                                { income: 75, expense: 60 },
+                                { income: 50, expense: 35 },
+                                { income: 85, expense: 65 },
+                                { income: 60, expense: 40 },
+                                { income: 45, expense: 30 },
+                              ].reduce((sum, d) => sum + d.expense, 0)
+                              return (totalExpense / totalIncome) * 100
+                            })()
+                          )}
+                          %
+                        </span>
+                        of income this month
                       </div>
                     </div>
 
