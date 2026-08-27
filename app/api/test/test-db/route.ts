@@ -1,0 +1,50 @@
+// import { prisma } from "@/lib/prisma"
+// import { NextResponse } from "next/server"
+
+// export async function GET() {
+//   try {
+//     await prisma.$queryRaw`SELECT 1`
+
+//     return NextResponse.json({
+//       success: true,
+//       message: "Database connected successfully",
+//     })
+//   } catch (error) {
+//     console.error("Database connection failed:", error)
+
+//     return NextResponse.json(
+//       {
+//         success: false,
+//         message: "Database connection failed",
+//       },
+//       { status: 500 }
+//     )
+//   }
+// }
+
+import { prisma } from "@/lib/prisma"
+import { NextResponse } from "next/server"
+
+export async function GET() {
+  try {
+    const categories = await prisma.category.count()
+
+    return NextResponse.json({
+      success: true,
+      message: "Database connected successfully",
+      data: {
+        categories,
+      },
+    })
+  } catch (error) {
+    console.error("Database connection failed:", error)
+
+    return NextResponse.json(
+      {
+        success: false,
+        message: "Database connection failed",
+      },
+      { status: 500 }
+    )
+  }
+}
